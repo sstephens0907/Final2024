@@ -54,7 +54,7 @@ public class AliceScript : MonoBehaviour
         if (!isStunned)
         {
             isStunned = true;
-            currentSpeed = 0;
+            currentSpeed = .7f;
             sprite.color = stunnedColor;
             StartCoroutine(StunCoroutine());
         }

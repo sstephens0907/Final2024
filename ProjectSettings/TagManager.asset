@@ -5,16 +5,17 @@ TagManager:
   serializedVersion: 2
   tags:
   - Platform
+  - Flower
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - foreground
   - Water
   - UI
   - Platform
   - RabbitHole
-  - 
+  - middle
   - 
   - 
   - 
@@ -39,6 +40,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: foreground
+    uniqueID: 1293121045
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: middle
+    uniqueID: 868923541
     locked: 0
