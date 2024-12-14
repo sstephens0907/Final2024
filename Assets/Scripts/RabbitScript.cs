@@ -8,6 +8,7 @@ public class RabbitScript : MonoBehaviour
 {
     public GameObject Rabbit;
     public GameObject Caterpillar;
+    public GameObject Cat;
     public float respawnInterval;
     public ParticleSystem dust;
     private List<Transform> platformPositions = new List<Transform>();
@@ -34,10 +35,11 @@ public class RabbitScript : MonoBehaviour
             {
                 // Get Caterpillar's current platform position
                 Vector3 caterpillarPosition = Caterpillar.transform.position;
+                Vector3 catPosition = Cat.transform.position;
 
                 // Filter out the platform occupied by the Caterpillar
                 List<Transform> availablePlatforms = platformPositions.FindAll(platform => 
-                    platform.position != caterpillarPosition);
+                    platform.position != caterpillarPosition && platform.position != catPosition);
 
                 if (availablePlatforms.Count > 0)
                 {

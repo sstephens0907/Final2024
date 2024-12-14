@@ -10,9 +10,15 @@ public class AliceScript : MonoBehaviour
 {
     
     public Rigidbody2D aliceRB;
-    public float Speed;
+    public float currentSpeed;
+    public float normalSpeed;
+    public float stunDuration;
+    private bool isStunned = false;
     public float input;
     public SpriteRenderer sprite;
+    public Sprite jumpSprite;
+    public Sprite fallSprite;
+    public Sprite idleSprite;
     
     public float jumpSpeed;
     public LayerMask groundLayer;
@@ -23,14 +29,53 @@ public class AliceScript : MonoBehaviour
     public float jumpTime;
     public float jumpCounter;
     private bool isJumping;
+    
+    private Color normalColor = Color.white;
+    private Color stunnedColor = Color.gray;
+
+    void Start()
+    {
+        currentSpeed = normalSpeed;
+    }
+
+    public void SetSpeed(float newSpeed)
+    {
+        currentSpeed = newSpeed;
+        sprite.color = normalColor;
+    }
+
+    public void ResetSpeed()
+    {
+        currentSpeed = normalSpeed;
+    }
+    //stunning section
+    public void Stun()
+    {
+        if (!isStunned)
+        {
+            isStunned = true;
+            currentSpeed = 0;
+            sprite.color = stunnedColor;
+            StartCoroutine(StunCoroutine());
+        }
+    }
+    
+    private IEnumerator StunCoroutine()
+    {
+        yield return new WaitForSeconds(stunDuration);
+        isStunned = false;
+        ResetSpeed();
+        sprite.color = normalColor;
+    }
 
     // Update is called once per frame
     void Update()
     {
+        if (isStunned) return;
         //setup for alice movement
        input = Input.GetAxisRaw("Horizontal");
     
-       aliceRB.velocity = new Vector2(input * Speed, aliceRB.velocity.y);
+       aliceRB.velocity = new Vector2(input * currentSpeed, aliceRB.velocity.y);
        
        //alice direction
        if (input < 0)
@@ -45,6 +90,7 @@ public class AliceScript : MonoBehaviour
        //jumping section
        //is alice on the ground
        isGrounded = Physics2D.OverlapCircle(feetPos.position, groundCheckCircle, groundLayer);
+       
        
        if (isGrounded == true && Input.GetButtonDown("Jump"))
        {
@@ -70,7 +116,20 @@ public class AliceScript : MonoBehaviour
        {
            isJumping = false;
        }
-     
+       //changing sprites
+       if (aliceRB.velocity.y > 0)
+       {
+           sprite.sprite = jumpSprite;
+       }
+       else if (aliceRB.velocity.y < 0)
+       {
+           sprite.sprite = fallSprite;
+       }
+       else if (isGrounded)
+       {
+           sprite.sprite = idleSprite;
+       }
+     //losing
        if (transform.position.y< -50)
        {
            SceneManager.LoadScene("You Lose");
