@@ -3,23 +3,23 @@ The goal is for Alice to catch the Rabbit. However, there are obstacles along he
 
 ## **Alice**
 dress changes when she's jumping, falling, or idle \
-turns grey if stunned by Cat \
+turns grey if stunned by Cat  
 
 ## **Rabbit**
 Teleports on an interval \
-Has a particle system (with new added material) that activates just before he leaves, as an indicator that he's about to change positions \
+Has a particle system (with new added material) that activates just before he leaves, as an indicator that he's about to change positions  
 
 ## **Caterpillar**
 Teleports on an interval \
-Has a particle system that activates when Alice is within a specific distance \
-Has a trigger to push Alice if she is within a specific distance \
+Has a particle system that activates when Alice is within a specific distance  
+Has a trigger to push Alice if she is within a specific distance  
 
 ## **Cat**
 Teleports on an interval \
-Has a color-changing particle system \
-Has a trigger to stun Alice if she is within a specific distance \
+Has a color-changing particle system  
+Has a trigger to stun Alice if she is within a specific distance  
 
 ## **Flowers**
 On a different sorting level so Alice can move behind them \
-Has a trigger that slows Alice's speed when she is within a specific distance \
+Has a trigger that slows Alice's speed when she is within a specific distance  
  
